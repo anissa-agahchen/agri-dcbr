@@ -1,6 +1,5 @@
 <template>
   <v-app class="grey lighten-4">
-    <Navbar />
     <v-stepper flat>
       <v-stepper-header>
         <v-stepper-step complete editable step="1">Registration</v-stepper-step>
@@ -31,13 +30,13 @@
           <v-stepper-step editable :complete="e6 > 3" step="3">Operation Locations</v-stepper-step>
 
           <v-stepper-content step="3">
-            <!-- <v-layout mt-4>
+            <v-layout mt-4>
               <subheader>Do you have additional operation locations?</subheader>
             </v-layout>
             <v-radio-group v-model="row" row>
               <v-radio label="Yes" value="radio-1"></v-radio>
               <v-radio label="No" value="radio-2"></v-radio>
-            </v-radio-group>-->
+            </v-radio-group>
             <!-- <OperationLocation ref="operationlocation" /> -->
             <v-card-title primary-title>
               <h2>Operation Location(s)</h2>
@@ -51,30 +50,22 @@
               <OperationLocation ref="operationlocation{{index+1}}" v-bind:number="index+1" />
             </div>
 
-            <v-btn @click.native="addLocation()">
+            <v-btn @click="addLocation()">
               <v-btn-text>Add</v-btn-text>
               <v-icon dark>add</v-icon>
             </v-btn>
 
-            <v-btn @click.native="removeLocation()">
+            <v-btn @click="removeLocation()">
               <v-btn-text>Remove</v-btn-text>
               <v-icon dark>remove</v-icon>
             </v-btn>
-
-            <!-- <button @click="addLocation()">Add Another</button> -->
           </v-stepper-content>
 
           <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
           <AnimalIdentification ref="animalidentification" />
-          <!-- <v-stepper-content step="4">
-            <AnimalIdentification/>
-          </v-stepper-content>-->
 
           <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
           <BreedingDetails ref="breedingdetails" />
-          <!-- <v-stepper-content step="5">
-            <BreedingDetails/>
-          </v-stepper-content>-->
         </v-stepper>
 
         <v-btn
@@ -83,17 +74,17 @@
           round
           mt-5
           class="blue darken-4 white--text"
-          @click.native="createOperator"
+          @click="createOperator()"
         >Submit</v-btn>
       </v-container>
     </v-content>
-    <Footer />
+    <!-- <Footer /> -->
   </v-app>
 </template>
 
 
 <script>
-import Navbar from "@/components/Navbar";
+//import Navbar from "@/components/Navbar";
 import OperationDetails from "@/components/OperationDetails";
 import Profile from "@/components/Profile";
 import OperationLocation from "@/components/OperationLocation";
@@ -106,7 +97,7 @@ import axios from "axios";
 export default {
   name: "App",
   components: {
-    Navbar,
+    //Navbar,
     Profile,
     OperationDetails,
     OperationLocation,

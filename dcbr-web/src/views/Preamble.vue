@@ -42,19 +42,11 @@
 </template>
 
 <script>
+// import Navbar from "@/components/Navbar";
 export default {
-  components: {}
+  components: {
+    // Navbar
+  }
 };
 </script>
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+

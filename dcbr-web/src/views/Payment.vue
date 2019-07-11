@@ -52,6 +52,8 @@
   </v-container>
 </template>
 
+import Navbar from "@/components/Navbar";
+
 
 <script>
 export default {

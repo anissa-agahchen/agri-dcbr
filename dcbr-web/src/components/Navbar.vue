@@ -1,12 +1,12 @@
 <template>
-  <v-toolbar flat height="100" class="blue darken-4">
-    <v-img src="https://www.thebridgeservices.ca/wp-content/uploads/2019/03/bc-gov-logo.png"></v-img>
-    <h2 class="white--text">Registration of Cat and Dog Breeders/Sellers of BC</h2>
+  <v-toolbar height="80" dark app color="#003366">
+    <v-toolbar-title class="headline text-uppercase">
+      <span class="font-weight-light">
+        <v-img :src="require('@/assets/logo.svg')" contain height="200">cats and dogs re</v-img>
+      </span>
+    </v-toolbar-title>
+    <h3>Cats and Dogs Breeder and Seller Registration</h3>
     <v-spacer></v-spacer>
-
-    <v-toolbar-items>
-      <v-btn flat class="white--text">Sign-in</v-btn>
-    </v-toolbar-items>
   </v-toolbar>
 </template>
 
