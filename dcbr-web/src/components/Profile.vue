@@ -62,6 +62,14 @@
                     required
                   ></v-text-field>
                 </v-flex>
+                <v-flex xs12 md4>
+                  <v-checkbox
+                    v-model="homeAsOperation"
+                    :label="`My home address is also my operation address`"
+                  ></v-checkbox>
+                  <!-- <label for="homeAsOperation">My home address is also my operation address</label> -->
+                  <!-- <input type="checkbox" v-model="homeAsOperation" /> -->
+                </v-flex>
               </v-layout>
 
               <!-- contact info  -->
@@ -106,6 +114,7 @@ export default {
     streetName: "",
     postalCode: "",
     city: "",
+    homeAsOperation: "",
     email: "",
     mask: "",
     phone: "",

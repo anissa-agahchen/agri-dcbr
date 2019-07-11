@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
+from django.utils.translation import gettext as _
 
 
 class Operator(models.Model):
@@ -17,16 +18,17 @@ class Operator(models.Model):
         (BOTH, "BREEDER & SELLER"),
     )
 
-    reg_num = models.CharField(max_length=14)
+    description = _("An operator is a seller/breeder of cats and/or dogs")
+    reg_num = models.CharField("Operator REG #", max_length=14)
     first_name = models.CharField(max_length=32)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50)
     phone_num = models.CharField(max_length=50, default="", blank=True)
     email_address = models.CharField(max_length=50, default="", blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    create_timestamp = models.DateTimeField(auto_now_add=True)
+    update_timestamp = models.DateTimeField(auto_now=True)
     CONTACT_METHOD_CHOICE = ((EMAIL, "email"), (MAIL, "mail"))
-    comm_pref = models.CharField(
+    comm_pref = models.CharField("Communication method",
         max_length=10, choices=CONTACT_METHOD_CHOICE, default=EMAIL
     )
     operation_type = models.CharField(
@@ -50,6 +52,7 @@ class Operator(models.Model):
 
     class Meta:
         verbose_name_plural = "Operators"
+        verbose_name = "Operators : breeders and sellers"
 
 
 class Address(models.Model):
@@ -130,13 +133,14 @@ class Risk_Factor_Operation(models.Model):
     def __str__(self):
         return "Operation risk for: \t %s " % (self.operator)
 
+    def publish(self):
+        "operator = breeder / seller"
+
     def save(self, *args, **kwargs):
         # self.operator = self.operator
         super().save(*args, **kwargs)
         self.reg_num = "BC-DCBR-" + str(self.pk).zfill(6)
         super().save()
-
-    # self.regNum = 'BC ' + str(self.kwargs['pk'])
 
     class Meta:
         verbose_name_plural = "RiskFactorOperations"

@@ -1,21 +1,17 @@
 <template>
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
-      <v-card-title primary-title>
+      <!-- <v-card-title primary-title>
         <h2>Operation Location(s)</h2>
-
-        <v-btn>
-          <v-btn-text>Add</v-btn-text>
-          <v-icon dark>add</v-icon>
-        </v-btn>
-      </v-card-title>
+      </v-card-title>-->
       <v-flex xs12>
         <v-card flat>
           <v-form v-model="valid">
             <v-container>
               <!-- Home address section  -->
+
               <v-layout row mt-3 mx-2>
-                <h4>Address 1</h4>
+                <h4>Address {{number}}</h4>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4>
@@ -56,6 +52,7 @@
 </template>
 <script>
 export default {
+  props: ["number"],
   data: () => ({
     valid: false,
     firstname: "",
@@ -77,6 +74,7 @@ export default {
     ],
     streetNumber: "",
     streetNumberRules: [v => !!v || "Street number is required"]
-  })
+  }),
+  methods: {}
 };
 </script>

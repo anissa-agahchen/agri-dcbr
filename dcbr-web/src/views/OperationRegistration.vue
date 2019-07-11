@@ -28,34 +28,49 @@
             <OperationDetails ref="operationdetails" />
           </v-stepper-content>
 
-          <!-- <v-stepper-step editable :complete="e6 > 3" step="3">Operation Location(s)</v-stepper-step>
+          <v-stepper-step editable :complete="e6 > 3" step="3">Operation Locations</v-stepper-step>
 
           <v-stepper-content step="3">
-            <OperationLocations ref="operationlocations"/>
-            <v-layout mt-4>
-              <subheader>Is your operation location(s) different than your home address?</subheader>
+            <!-- <v-layout mt-4>
+              <subheader>Do you have additional operation locations?</subheader>
             </v-layout>
             <v-radio-group v-model="row" row>
               <v-radio label="Yes" value="radio-1"></v-radio>
               <v-radio label="No" value="radio-2"></v-radio>
-            </v-radio-group>
-            <OpLocation/>
-            <OpLocation2/>
-          </v-stepper-content>-->
+            </v-radio-group>-->
+            <!-- <OperationLocation ref="operationlocation" /> -->
+            <v-card-title primary-title>
+              <h2>Operation Location(s)</h2>
+            </v-card-title>
 
-          <!-- <v-stepper-step editable :complete="e6 > 4" step="4">Veterinary Relationship</v-stepper-step>
-          <v-stepper-content step="4">
-            
-            <Vet/>
-          </v-stepper-content>-->
+            <!-- <div v-for="(child, index) in children">
+              <component :is="child" :key="child.name" v-bind:number="index+1"></component>
+            </div>-->
 
-          <v-stepper-step editable :complete="e6 > 3" step="3">Animal Identification</v-stepper-step>
+            <div v-for="(child, index) in children">
+              <OperationLocation ref="operationlocation{{index+1}}" v-bind:number="index+1" />
+            </div>
+
+            <v-btn @click.native="addLocation()">
+              <v-btn-text>Add</v-btn-text>
+              <v-icon dark>add</v-icon>
+            </v-btn>
+
+            <v-btn @click.native="removeLocation()">
+              <v-btn-text>Remove</v-btn-text>
+              <v-icon dark>remove</v-icon>
+            </v-btn>
+
+            <!-- <button @click="addLocation()">Add Another</button> -->
+          </v-stepper-content>
+
+          <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
           <AnimalIdentification ref="animalidentification" />
           <!-- <v-stepper-content step="4">
             <AnimalIdentification/>
           </v-stepper-content>-->
 
-          <v-stepper-step editable :complete="e6 > 4" step="4">Breeding Details</v-stepper-step>
+          <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
           <BreedingDetails ref="breedingdetails" />
           <!-- <v-stepper-content step="5">
             <BreedingDetails/>
@@ -76,11 +91,12 @@
   </v-app>
 </template>
 
+
 <script>
 import Navbar from "@/components/Navbar";
 import OperationDetails from "@/components/OperationDetails";
 import Profile from "@/components/Profile";
-//import OpLocation from "@/components/OpLocation";
+import OperationLocation from "@/components/OperationLocation";
 //import OpLocation2 from "@/components/OpLocation2";
 import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
@@ -93,7 +109,7 @@ export default {
     Navbar,
     Profile,
     OperationDetails,
-    //OpLocation,
+    OperationLocation,
     //OpLocation2,
     // Vet,
     AnimalIdentification,
@@ -103,15 +119,17 @@ export default {
   data() {
     return {
       e6: 1,
-      errors: []
+      errors: [],
+      children: []
     };
   },
   methods: {
     createOperator() {
       console.log("Submit clicked");
       axios
-        .post("/api/operator/", {
-          // for localhost, prefix: http://localhost:8080/
+        .post("http://localhost:8080/api/operator/", {
+          // for localhost, use "http://localhost:8080/api/operator"
+          // before deploying to Openshift, use "/api/operator"
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,
@@ -173,19 +191,18 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+    },
+    addLocation() {
+      // <OperationLocations ref="operationlocations" />;
+      // this.children.push(OperationLocation);
+      this.children.push(OperationLocation);
+    },
+    removeLocation() {
+      // <OperationLocations ref="operationlocations" />;
+      // this.children.push(OperationLocation);
+      this.children.pop();
     }
   }
 };
 </script>
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
