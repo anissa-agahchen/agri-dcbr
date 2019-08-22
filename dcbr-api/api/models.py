@@ -116,7 +116,7 @@ class Address(models.Model):
     
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.registration_Number, self.type, self.street_name)
+        return "Reg ID: \t %s %s , %s" % (self.registration_Number, self.address_type, self.street_name)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
